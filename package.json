@@ -1,0 +1,17 @@
+{
+  "name": "custom-media-player",
+  "version": "0.0.1",
+  "description": "My custome HTML5 media player using mediaelement.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CoryKleiser/custom-player.git"
+  },
+  "author": "Cory Kleiser",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jshint": "^1.9.0",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-webserver": "^0.9.1"
+  }
+}

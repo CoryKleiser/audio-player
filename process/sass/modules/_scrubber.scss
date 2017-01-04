@@ -1,0 +1,17 @@
+.ap-scrubberContainer{
+  display: block;
+  height: auto;
+  background-color: $color-main;
+  @include rounded();
+  .ap-scrubberBar{
+    display: inline;
+    width: 100%;
+    .ap-scrubber{
+      display: inline-block;
+      text-align: center;
+      height:inherit;
+      color: $color-interface;
+      background-color: $color-interface;
+    }
+  }
+}

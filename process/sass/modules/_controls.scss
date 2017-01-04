@@ -1,0 +1,15 @@
+.ap-controls{
+  margin: $border-radius;
+  width: 100%;
+  text-align: center;
+
+  .ap-togglePlay, .ap-back10, .ap-skip10{
+    display: inline-block;
+    background: transparent;
+    border: none;
+    min-width: 30px;
+
+    color: $color-interface;
+    font-size: 1.25em;
+  }
+}
