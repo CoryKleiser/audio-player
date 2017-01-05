@@ -42,4 +42,4 @@ gulp.task('babel', function () {
         .pipe(gulp.dest('builds/site/js/es5'));
 });
 
-gulp.task('default', ['sass', 'watch', 'webserver', 'babel']);
+gulp.task('default', ['sass', 'watch', 'webserver']);
