@@ -1,7 +1,7 @@
 {
-  "name": "custom-media-player",
+  "name": "KleiserAudioPlayer",
   "version": "0.0.1",
-  "description": "My custome HTML5 media player using mediaelement.js",
+  "description": "My custom HTML5 audio player",
   "repository": {
     "type": "git",
     "url": "https://github.com/CoryKleiser/custom-player.git"
@@ -13,5 +13,8 @@
     "gulp-ruby-sass": "^1.0.5",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-webserver": "^0.9.1"
+  },
+  "dependencies": {
+    "rxjs": "^5.0.2"
   }
 }
