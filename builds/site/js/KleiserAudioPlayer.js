@@ -72,20 +72,19 @@ audioPlayers.forEach(function (audio) {
     const currentPosition = document.getElementsByClassName('ap-scrubber')[i];
     console.log(scrubber);
 
-    //todo: handle scrubber clicks
+    //: handle scrubber clicks
     scrubberBox.addEventListener('mouseup', function (e) {
+        console.log(e);
         const rect = scrubberBox.getBoundingClientRect();
-        console.log(rect);
         const positionRequested = (e.clientX - rect.left) / rect.width;
         audio.currentTime = audio.duration * positionRequested;
-        //todo: click logic
-        console.log(positionRequested);
-        console.log(e.clientX);
     });
     //fixme: handle event with Observable
-    // const scrubberClick = Observable.fromEvent(scrubber, 'click');
-    // scrubberClick.forEach(function (e) {
-    //     console.log(e.clientX);
+    // const scrubberClicks = Observable.fromEvent(scrubber, 'click');
+    // scrubberClicks.forEach(function (e) {
+    // const rect = scrubberBox.getBoundingClientRect();
+    // const positionRequested = (e.clientX - rect.left) / rect.width;
+    // audio.currentTime = audio.duration * positionRequested;
     // });
 
     /**

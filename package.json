@@ -4,7 +4,7 @@
   "description": "My custom HTML5 audio player",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CoryKleiser/custom-player.git"
+    "url": "https://github.com/CoryKleiser/audio-player.git"
   },
   "author": "Cory Kleiser",
   "devDependencies": {
