@@ -1,5 +1,7 @@
 'use strict';
 
+import Rx from 'rxjs/Rx';
+
 //vars
 const audioPlayers = Array.from(document.getElementsByTagName('audio'));
 
