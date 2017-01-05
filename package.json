@@ -8,13 +8,14 @@
   },
   "author": "Cory Kleiser",
   "devDependencies": {
+    "@reactivex/rxjs": "^5.0.2",
+    "babel-preset-env": "^1.1.5",
     "gulp": "^3.8.11",
+    "gulp-babel": "^6.1.2",
     "gulp-jshint": "^1.9.0",
     "gulp-ruby-sass": "^1.0.5",
     "gulp-sourcemaps": "^1.5.2",
-    "gulp-webserver": "^0.9.1"
-  },
-  "dependencies": {
-    "rxjs": "^5.0.2"
+    "gulp-webserver": "^0.9.1",
+    "rxjs-es": "^5.0.0-beta.12"
   }
 }

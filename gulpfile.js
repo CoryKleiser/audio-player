@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    babel = require('gulp-babel'),
     jshint = require('gulp-jshint'),
     sass = require('gulp-ruby-sass'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -35,4 +36,10 @@ gulp.task('webserver', function() {
         }));
 });
 
-gulp.task('default', ['sass', 'watch', 'webserver']);
+gulp.task('babel', function () {
+    return gulp.src('builds/site/js/**/*')
+        .pipe(babel())
+        .pipe(gulp.dest('builds/site/js/es5'));
+});
+
+gulp.task('default', ['sass', 'watch', 'webserver', 'babel']);

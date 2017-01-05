@@ -1,8 +1,9 @@
 'use strict';
+//import rxjs from '@reactivex/rxjs';
 
-import Rx from 'rxjs/Rx';
 
 //vars
+// const Observable = rxjs.Observable;
 const audioPlayers = Array.from(document.getElementsByTagName('audio'));
 
 console.log(audioPlayers);
@@ -66,9 +67,27 @@ audioPlayers.forEach(function (audio) {
         .addEventListener('click', (e) => skipTenSec(audio));
 
     //set up scrubber
+    const scrubberBox = document.getElementsByClassName('ap-scrubberContainer')[i];
     const scrubber = document.getElementsByClassName('ap-scrubberBar')[i];
     const currentPosition = document.getElementsByClassName('ap-scrubber')[i];
     console.log(scrubber);
+
+    //todo: handle scrubber clicks
+    scrubberBox.addEventListener('mouseup', function (e) {
+        const rect = scrubberBox.getBoundingClientRect();
+        console.log(rect);
+        const positionRequested = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = audio.duration * positionRequested;
+        //todo: click logic
+        console.log(positionRequested);
+        console.log(e.clientX);
+    });
+    //fixme: handle event with Observable
+    // const scrubberClick = Observable.fromEvent(scrubber, 'click');
+    // scrubberClick.forEach(function (e) {
+    //     console.log(e.clientX);
+    // });
+
     /**
      * Animate Scrubber to time updates
      */

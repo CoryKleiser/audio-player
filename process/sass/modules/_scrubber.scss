@@ -12,6 +12,7 @@
       height:inherit;
       color: $color-interface;
       background-color: $color-interface;
+      @include rounded();
     }
   }
 }
