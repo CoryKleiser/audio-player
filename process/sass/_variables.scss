@@ -1,28 +1,44 @@
 /*! Load Fonts */
 @import url('https://fonts.googleapis.com/css?family=Amatic+SC|Archivo+Narrow|Merriweather|Proza+Libre|Quicksand|Roboto+Slab|Rubik');
 
-$black:         #000000;
-$offwhite:      #fdfff8;
-$grey:          #bbb;
-$offgrey:       #7b7d82;
-$darkgrey:      #333;
-$darkblue:      #0e0a26;
-$yellow:        #fff426;
-$lighterblue:   #3ddbff;
-$lightblue:     hsla(201, 100%, 60%, .9);
-$blue:          #513ce5;
-$green:         #98fe6d;
-$orange:        #ffac26;
-$darkorange:    #b36200;
-$red:           #fa264b;
-$magenta:       #873b3a;
-$lightmagenta:  #c08488;
-$purple:        #8e30e3;
+$black          : #000000;
+$lightgray      : #819090;
+$gray           : #708284;
+$mediumgray     : #536870;
+$darkgray       : #475B62;
+$darkgrey       : #333;
+$darkblue       : #0e0a26;
+$lighterblue    : #3ddbff;
+$lightblue      : hsla(201, 100%, 60%, .9);
+$blue           : #513ce5;
+$darkblue       : #0A2933;
+$darkerblue     : #042029;
+$paleryellow    : #FCF4DC;
+$paleyellow     : #EAE3CB;
+$yellow         : #fff426;
+$darkyellow     : #A57706;
+$lightorange    : #ffac26;
+$orange         : #b36200;
+$darkorange     : #BD3613;
+$red            : #D11C24;
+$pink           : #C61C6F;
+$blue           : #2176C7;
+$cyan           : #259286;
+$green          : #738A05;
+$lightgreen     : #98fe6d;
+$red            : #fa264b;
+$magenta        : #873b3a;
+$lightmagenta   : #c08488;
+$purple         : #8e30e3;
+$purpleblue     : #595AB7;
 
 
-$color-main:              $orange;
-$color-backgrounds:       $lightblue;
-$color-interface:         $darkorange;
+
+
+
+$color-main:              $lightgray;
+$color-backgrounds:       $darkgrey;
+$color-interface:         $darkyellow;
 $color-headlines-other:   $lighterblue;
 
 $font-main: 'Archivo+Narrow', Helvetica, sans-serif;

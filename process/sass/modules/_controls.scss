@@ -1,15 +1,25 @@
 .ap-controls{
   margin: $border-radius;
-  width: 100%;
   text-align: center;
-
-  .ap-togglePlay, .ap-back10, .ap-skip10{
-    display: inline-block;
-    background: transparent;
-    border: none;
-    min-width: 30px;
-
-    color: $color-interface;
-    font-size: 1.25em;
+  width: 100%;
+  .ap-navigation {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    left: 2.5%;
+    display: inline;
+    .ap-togglePlay, .ap-back10, .ap-skip10 {
+      @include btn();
+    }
+  }
+  .ap-volctrl {
+    display: inline;
+    .ap-volume {
+      @include btn();
+      max-width: 5%;
+      position: relative;
+      float: right;
+      right: 5%;
+    }
   }
 }

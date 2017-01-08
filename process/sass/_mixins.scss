@@ -3,3 +3,13 @@
   border-radius: $border-radius;
   background-clip: padding-box;
 }
+
+@mixin btn ($border: none, $fontsize: 1.25em, $color: $color-interface){
+  display: inline-block;
+  background: transparent;
+  border: $border;
+  min-width: 30px;
+
+  color: $color;
+  font-size: $fontsize;
+}
