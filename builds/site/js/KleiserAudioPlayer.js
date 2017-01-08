@@ -1,9 +1,5 @@
 'use strict';
-//import rxjs from '@reactivex/rxjs';
-
-
 //vars
-// const Observable = rxjs.Observable;
 const audioPlayers = Array.from(document.getElementsByTagName('audio'));
 
 console.log(audioPlayers);
@@ -12,8 +8,17 @@ console.log(audioPlayers);
 //functions
 const insertAfter = (newNode, referenceNode) => referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 
-const backTenSec = track => track.currentTime-=10;
-const skipTenSec = track => track.currentTime+=10;
+const ff = track => {
+    if (track.playbackRate < 4) {
+        track.playbackRate += 1;
+        console.log(track.playbackRate);
+    }
+    else {
+        track.playbackRate = 1;
+        console.log(track.playbackRate);
+    }
+};
+
 
 
 let i = 0;
@@ -32,9 +37,14 @@ audioPlayers.forEach(function (audio) {
             </div>
         </div>
         <div class="ap-controls">
-            <button class="ap-back10">&laquo;10</button>
-            <button class="ap-togglePlay"></button>
-            <button class="ap-skip10">10&raquo;</button>
+            <div class="ap-navigation">
+                <button class="ap-back10">&laquo;10</button>
+                <button class="ap-togglePlay"></button>
+                <button class="ap-skip10">10&raquo;</button>
+            </div>
+            <div class="ap-volctrl">
+                <button class="ap-volume">sp</button>
+            </div>
         </div>        
 `;
 
@@ -44,48 +54,43 @@ audioPlayers.forEach(function (audio) {
 
 
     //set up button
-    const button = document.getElementsByClassName('ap-togglePlay')[i];
-    button.innerHTML = '&#9654;';
-    button.addEventListener('click', (e) => {
+    const playPause = document.getElementsByClassName('ap-togglePlay')[i];
+    playPause.innerHTML = '&#9654;';
+    const togglePlayPause = Rx.Observable.fromEvent(playPause, 'click');
+    togglePlayPause.forEach((e) => {
         if (audio.paused) {
             audio.play();
             setTimeout(()=>console.log(`${audio.currentTime/audio.duration*100}%`), 1000);
-            button.innerHTML = '&#10073;&#10073;';
+            playPause.innerHTML = '&#10073;&#10073;';
         }
         else {
             audio.pause();
-            button.innerHTML = '&#9654;';
+            playPause.innerHTML = '&#9654;';
         }
     });
 
     //set up nav controls
-    document
-        .getElementsByClassName('ap-back10')[i]
-        .addEventListener('click', (e) => backTenSec(audio));
-    document
-        .getElementsByClassName('ap-skip10')[i]
-        .addEventListener('click', (e) => skipTenSec(audio));
+
+    const back10 = document.getElementsByClassName('ap-back10')[i];
+    const back10sec = Rx.Observable.fromEvent(back10, 'click');
+    back10sec.forEach((e) => audio.currentTime-=10);
+
+    const skip10 = document.getElementsByClassName('ap-skip10')[i];
+    const skip10sec = Rx.Observable.fromEvent(skip10, 'click');
+    skip10sec.forEach((e) => audio.currentTime+=10);
 
     //set up scrubber
     const scrubberBox = document.getElementsByClassName('ap-scrubberContainer')[i];
     const scrubber = document.getElementsByClassName('ap-scrubberBar')[i];
     const currentPosition = document.getElementsByClassName('ap-scrubber')[i];
-    console.log(scrubber);
 
-    //: handle scrubber clicks
-    scrubberBox.addEventListener('mouseup', function (e) {
+    const scrubberClicks = Rx.Observable.fromEvent(scrubberBox, 'click');
+    scrubberClicks.forEach((e) => {
         console.log(e);
         const rect = scrubberBox.getBoundingClientRect();
         const positionRequested = (e.clientX - rect.left) / rect.width;
         audio.currentTime = audio.duration * positionRequested;
     });
-    //fixme: handle event with Observable
-    // const scrubberClicks = Observable.fromEvent(scrubber, 'click');
-    // scrubberClicks.forEach(function (e) {
-    // const rect = scrubberBox.getBoundingClientRect();
-    // const positionRequested = (e.clientX - rect.left) / rect.width;
-    // audio.currentTime = audio.duration * positionRequested;
-    // });
 
     /**
      * Animate Scrubber to time updates
@@ -93,12 +98,15 @@ audioPlayers.forEach(function (audio) {
     audio.ontimeupdate = () => {
         audio.percentPlayed = audio.currentTime/audio.duration*100;
         currentPosition.setAttribute('style', `width: ${audio.percentPlayed}%`);
-        console.log(`${audio.percentPlayed}%`);
         if (audio.percentPlayed === 100) {
             button.innerHTML ='&#9654;'
         }
     };
+
+    //todo:: find proper icons for volume button
+    //todo:: set up volume controls to appear on hover
+    //todo:: enable dragable volume control
+
     i++;
     console.log(i);
-
 });
