@@ -42,8 +42,11 @@ audioPlayers.forEach(function (audio) {
                 <button class="ap-togglePlay"></button>
                 <button class="ap-skip10">10&raquo;</button>
             </div>
-            <div class="ap-volctrl">
-                <button class="ap-volume">sp</button>
+            <div class="ap-volume">
+                <button class="ap-volbtn">sp</button>
+                <section class="ap-volslider">
+                    <h1>Volume Slider Here</h1>
+                </section>
             </div>
         </div>        
 `;
@@ -57,6 +60,9 @@ audioPlayers.forEach(function (audio) {
     const playPause = document.getElementsByClassName('ap-togglePlay')[i];
     playPause.innerHTML = '&#9654;';
     const togglePlayPause = Rx.Observable.fromEvent(playPause, 'click');
+    /**
+     * toggle play/pause track
+     */
     togglePlayPause.forEach((e) => {
         if (audio.paused) {
             audio.play();
@@ -73,9 +79,15 @@ audioPlayers.forEach(function (audio) {
 
     const back10 = document.getElementsByClassName('ap-back10')[i];
     const back10sec = Rx.Observable.fromEvent(back10, 'click');
+    /**
+     * go back 10 seconds
+     */
     back10sec.forEach((e) => audio.currentTime-=10);
 
     const skip10 = document.getElementsByClassName('ap-skip10')[i];
+    /**
+     * skip forward 10 seconds
+     */
     const skip10sec = Rx.Observable.fromEvent(skip10, 'click');
     skip10sec.forEach((e) => audio.currentTime+=10);
 
@@ -85,6 +97,9 @@ audioPlayers.forEach(function (audio) {
     const currentPosition = document.getElementsByClassName('ap-scrubber')[i];
 
     const scrubberClicks = Rx.Observable.fromEvent(scrubberBox, 'click');
+    /**
+     * skip to location in track based on scrubber clicks
+     */
     scrubberClicks.forEach((e) => {
         console.log(e);
         const rect = scrubberBox.getBoundingClientRect();
@@ -104,7 +119,37 @@ audioPlayers.forEach(function (audio) {
     };
 
     //todo:: find proper icons for volume button
-    //todo:: set up volume controls to appear on hover
+    const volume = document.getElementsByClassName('ap-volume')[i];
+    const volumeBtn = document.getElementsByClassName('ap-volbtn')[i];
+    const volumeSlider = document.getElementsByClassName('ap-volslider')[i];
+    const volumeClick = Rx.Observable.fromEvent(volumeBtn, 'click');
+    const volumeEnter = Rx.Observable.fromEvent(volume, 'mouseover');
+    const volumeExit = Rx.Observable.fromEvent(volume, 'mouseleave');
+    const currentVolume = audio.volume;
+    /**
+     * toggle mute on click
+     */
+    volumeClick.forEach(function (e) {
+        if(audio.volume > 0){
+            audio.volume = 0;
+        } else {
+            audio.volume = currentVolume;
+        }
+    });
+    /**
+     * volume controls to appear on mouse over
+     */
+    volumeEnter.forEach(function (e) {
+        console.log('working');
+        volumeSlider.style.display = 'inline';
+    });
+    /**
+     * volume controls to appear on mouse exit
+     */
+    volumeExit.forEach(function (e) {
+        //todo change on mouse out to preserve display
+        volumeSlider.style.display = 'none';
+    });
     //todo:: enable dragable volume control
 
     i++;

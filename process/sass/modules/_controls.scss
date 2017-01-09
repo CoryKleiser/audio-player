@@ -12,14 +12,17 @@
       @include btn();
     }
   }
-  .ap-volctrl {
+  .ap-volume {
     display: inline;
-    .ap-volume {
+    .ap-volbtn {
       @include btn();
       max-width: 5%;
       position: relative;
       float: right;
       right: 5%;
+    }
+    .ap-volslider{
+      display: none;
     }
   }
 }
