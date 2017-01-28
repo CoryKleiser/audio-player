@@ -9,6 +9,9 @@
     display: inline;
     .ap-togglePlay, .ap-back10, .ap-skip10 {
       @include btn();
+      &:hover{
+        color: lighten($player-color-interface, 15%);
+      }
     }
   }
 }

@@ -81,13 +81,13 @@
         /**
          * skip forward 10 seconds
          */
-        // const skip10sec = Rx.Observable.fromEvent(skip10, 'click');
-        // skip10sec.forEach((e) => audio.currentTime+=10);
+        const skip10sec = Rx.Observable.fromEvent(skip10, 'click');
+        skip10sec.forEach((e) => audio.currentTime+=10);
         /**
          * fast forward
          */
-        const fastForward = Rx.Observable.fromEvent(skip10, 'click');
-        fastForward.forEach((e) => ff(audio));
+        // const fastForward = Rx.Observable.fromEvent(skip10, 'click');
+        // fastForward.forEach((e) => ff(audio));
 
         //set up scrubber
         const scrubberBox = document.getElementsByClassName('ap-scrubberContainer')[i];
@@ -119,7 +119,7 @@
         /**
          * reset scrubberHover width to 0
          */
-        scrubberMouseouts.forEach((e) => {
+        scrubberMouseouts.forEach(() => {
             scrubberHover.setAttribute('style', 'width:0');
         });
 
