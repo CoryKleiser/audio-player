@@ -12,7 +12,7 @@ gulp.task('js', function() {
 });
 
 gulp.task('sass', function () {
-    return sass('process/sass/style.scss', {
+    return sass('process/sass/KleiserAudioPlayerStyles.scss', {
         sourcemap: true,
         style: 'expanded'
     })

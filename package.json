@@ -1,7 +1,7 @@
 {
   "name": "KleiserAudioPlayer",
   "version": "0.0.1",
-  "description": "My custom HTML5 audio player",
+  "description": "This is a highly customizable audio player plugin. You can use simple css (or whatever) to customize the color, size, and responsiveness of the player very easily.",
   "repository": {
     "type": "git",
     "url": "https://github.com/CoryKleiser/audio-player.git"
