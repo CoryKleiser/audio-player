@@ -1,3 +1,5 @@
+'use strict';
+
 (function () {
     'use strict';
     //vars
@@ -29,7 +31,7 @@
         audioContainer.setAttribute('class', 'audio');
 
         //set innerHTML
-        audioContainer.innerHTML = '\n            <div class="ap-scrubberContainer">\n                <div class="ap-scrubberBar">\n                    <div style="width:0%" class="ap-scrubber">&nbsp;</div>\n                </div>\n            </div>\n            <div class="ap-controls">\n                <div class="ap-navigation">\n                    <button class="ap-back10">&laquo;10</button>\n                    <button class="ap-togglePlay"></button>\n                    <button class="ap-skip10">10&raquo;</button>\n                </div>\n            </div>        \n    ';
+        audioContainer.innerHTML = '\n            <div class="ap-scrubberContainer">\n                <div class="ap-scrubberBar">\n                    <div style="width:0%" class="ap-scrubber">&nbsp;</div>\n                    <div style="width:0%" class="ap-scrubberMouseover">&nbsp;</div>\n                </div>\n            </div>\n            <div class="ap-controls">\n                <div class="ap-navigation">\n                    <button class="ap-back10">&laquo;10</button>\n                    <button class="ap-togglePlay"></button>\n                    <button class="ap-skip10">10&raquo;</button>\n                </div>\n            </div>        \n    ';
 
         //add to document
         insertAfter(audioContainer, audio);
@@ -68,27 +70,54 @@
         /**
          * skip forward 10 seconds
          */
-        // const skip10sec = Rx.Observable.fromEvent(skip10, 'click');
-        // skip10sec.forEach((e) => audio.currentTime+=10);
+        var skip10sec = Rx.Observable.fromEvent(skip10, 'click');
+        skip10sec.forEach(function (e) {
+            return audio.currentTime += 10;
+        });
         /**
          * fast forward
          */
-        var fastForward = Rx.Observable.fromEvent(skip10, 'click');
-        fastForward.forEach(function (e) {
-            return ff(audio);
-        });
+        // const fastForward = Rx.Observable.fromEvent(skip10, 'click');
+        // fastForward.forEach((e) => ff(audio));
 
         //set up scrubber
         var scrubberBox = document.getElementsByClassName('ap-scrubberContainer')[i];
         var scrubber = document.getElementsByClassName('ap-scrubberBar')[i];
+        var scrubberHover = document.getElementsByClassName('ap-scrubberMouseover')[i];
         var currentPosition = document.getElementsByClassName('ap-scrubber')[i];
 
+        var scrubberMousemoves = Rx.Observable.fromEvent(scrubberBox, 'mousemove');
+        var scrubberMouseouts = Rx.Observable.fromEvent(scrubberBox, 'mouseout');
         var scrubberClicks = Rx.Observable.fromEvent(scrubberBox, 'click');
+
+        /**
+         * Animate buffer
+         */
+        audio.progress = function () {
+            console.log(audio.buffer);
+        };
+
+        /**
+         * animate scrubber on mouseover
+         */
+        scrubberMousemoves.forEach(function (e) {
+            var rect = scrubberBox.getBoundingClientRect();
+            var mousePosition = (e.clientX - rect.left) / rect.width * 100;
+            console.log(mousePosition);
+            scrubberHover.setAttribute('style', 'width: ' + mousePosition + '%');
+        });
+
+        /**
+         * reset scrubberHover width to 0
+         */
+        scrubberMouseouts.forEach(function () {
+            scrubberHover.setAttribute('style', 'width:0');
+        });
+
         /**
          * skip to location in track based on scrubber clicks
          */
         scrubberClicks.forEach(function (e) {
-            console.log(e);
             var rect = scrubberBox.getBoundingClientRect();
             var positionRequested = (e.clientX - rect.left) / rect.width;
             audio.currentTime = audio.duration * positionRequested;
@@ -102,6 +131,7 @@
             currentPosition.setAttribute('style', 'width: ' + audio.percentPlayed + '%');
             if (audio.percentPlayed === 100) {
                 playPause.innerHTML = '&#9658;';
+                currentPosition.setAttribute('style', 'width: 0%');
             }
         };
 
