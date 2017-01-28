@@ -4,12 +4,12 @@
   background-clip: padding-box;
 }
 
-@mixin btn ($border: none, $fontsize: 1.25em, $color: $player-color-interface){
+@mixin btn ($border: none, $font-size: $fontsize, $color: $player-color-interface){
   display: inline-block;
   background: transparent;
   border: $border;
   min-width: 30px;
 
   color: $color;
-  font-size: $fontsize;
+  font-size: $font-size;
 }

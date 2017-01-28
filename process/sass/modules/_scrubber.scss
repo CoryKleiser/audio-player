@@ -1,21 +1,26 @@
 .ap-scrubberContainer{
   display: block;
   width: 90%;
-  height: auto;
-  margin: 5px auto 0;
-  @include rounded();
+  height: $scrubber-height;
+  margin: 0 auto;
 
   background-color: $player-color-main;
+  .ap-scrubberMouseover{
+    height:$scrubber-height;
+    position: relative;
+    bottom: 18px;
+    background-color: transparentize($player-color-interface, .5);
+    display: block;
+  }
   .ap-scrubberBar{
     display: inline;
     width: 100%;
     .ap-scrubber{
       display: inline-block;
       text-align: center;
-      height:inherit;
+      height:$scrubber-height;
       color: $player-color-interface;
       background-color: $player-color-interface;
-      @include rounded();
     }
   }
 }

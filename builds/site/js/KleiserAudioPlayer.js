@@ -33,6 +33,7 @@
             <div class="ap-scrubberContainer">
                 <div class="ap-scrubberBar">
                     <div style="width:0%" class="ap-scrubber">&nbsp;</div>
+                    <div style="width:0%" class="ap-scrubberMouseover">&nbsp;</div>
                 </div>
             </div>
             <div class="ap-controls">
@@ -91,8 +92,10 @@
         //set up scrubber
         const scrubberBox = document.getElementsByClassName('ap-scrubberContainer')[i];
         const scrubber = document.getElementsByClassName('ap-scrubberBar')[i];
+        const scrubberHover = document.getElementsByClassName('ap-scrubberMouseover')[i];
         const currentPosition = document.getElementsByClassName('ap-scrubber')[i];
 
+        const scrubberMouseover = Rx.Observable.fromEvent(scrubberBox, 'mousemove');
         const scrubberClicks = Rx.Observable.fromEvent(scrubberBox, 'click');
 
         /**
@@ -103,10 +106,19 @@
         }
 
         /**
+         * animate scrubber on mouseover
+         */
+        scrubberMouseover.forEach((e) => {
+            const rect = scrubberBox.getBoundingClientRect();
+            const mousePosition = ((e.clientX - rect.left) / rect.width) * 100;
+            console.log(mousePosition);
+            scrubberHover.setAttribute('style', `width: ${mousePosition}%`);
+        });
+
+        /**
          * skip to location in track based on scrubber clicks
          */
         scrubberClicks.forEach((e) => {
-            console.log(e);
             const rect = scrubberBox.getBoundingClientRect();
             const positionRequested = (e.clientX - rect.left) / rect.width;
             audio.currentTime = audio.duration * positionRequested;
@@ -120,6 +132,7 @@
             currentPosition.setAttribute('style', `width: ${audio.percentPlayed}%`);
             if (audio.percentPlayed === 100) {
                 playPause.innerHTML ='&#9658;'
+                currentPosition.setAttribute('style', 'width: 0%');
             }
         };
 
