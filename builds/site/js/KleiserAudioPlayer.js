@@ -95,7 +95,8 @@
         const scrubberHover = document.getElementsByClassName('ap-scrubberMouseover')[i];
         const currentPosition = document.getElementsByClassName('ap-scrubber')[i];
 
-        const scrubberMouseover = Rx.Observable.fromEvent(scrubberBox, 'mousemove');
+        const scrubberMousemoves = Rx.Observable.fromEvent(scrubberBox, 'mousemove');
+        const scrubberMouseouts = Rx.Observable.fromEvent(scrubberBox, 'mouseout');
         const scrubberClicks = Rx.Observable.fromEvent(scrubberBox, 'click');
 
         /**
@@ -108,11 +109,18 @@
         /**
          * animate scrubber on mouseover
          */
-        scrubberMouseover.forEach((e) => {
+        scrubberMousemoves.forEach((e) => {
             const rect = scrubberBox.getBoundingClientRect();
             const mousePosition = ((e.clientX - rect.left) / rect.width) * 100;
             console.log(mousePosition);
             scrubberHover.setAttribute('style', `width: ${mousePosition}%`);
+        });
+
+        /**
+         * reset scrubberHover width to 0
+         */
+        scrubberMouseouts.forEach((e) => {
+            scrubberHover.setAttribute('style', 'width:0');
         });
 
         /**
