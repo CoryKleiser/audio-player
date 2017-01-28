@@ -26,7 +26,7 @@ I wanted a lightweight customizable audio player using HTML, CSS, and JavaScript
 
 2) include [KleiserAudioPlayer.js](builds/site/js/es5/KleiserAudioPlayer.js) from this repository (use the compiled ES5 javascript)
 
-3) include the [KleiserAudioPlayerStyles.css](builds/site/css/KleiserAudioPlayer.css)
+3) include the [KleiserAudioPlayerStyles.css](builds/site/css/KleiserAudioPlayerStyles.css)
 
 4) customize CSS to your liking
 
