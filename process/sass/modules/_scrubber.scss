@@ -5,7 +5,7 @@
   margin: 5px auto 0;
   @include rounded();
 
-  background-color: $color-main;
+  background-color: $player-color-main;
   .ap-scrubberBar{
     display: inline;
     width: 100%;
@@ -13,8 +13,8 @@
       display: inline-block;
       text-align: center;
       height:inherit;
-      color: $color-interface;
-      background-color: $color-interface;
+      color: $player-color-interface;
+      background-color: $player-color-interface;
       @include rounded();
     }
   }

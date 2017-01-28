@@ -6,23 +6,9 @@
     margin-left: auto;
     margin-right: auto;
     position: relative;
-    left: 2.5%;
     display: inline;
     .ap-togglePlay, .ap-back10, .ap-skip10 {
       @include btn();
-    }
-  }
-  .ap-volume {
-    display: inline;
-    .ap-volbtn {
-      @include btn();
-      max-width: 5%;
-      position: relative;
-      float: right;
-      right: 5%;
-    }
-    .ap-volslider{
-      display: none;
     }
   }
 }
