@@ -97,22 +97,24 @@
             console.log(audio.buffer);
         };
 
-        /**
-         * animate scrubber on mouseover
-         */
-        scrubberMousemoves.forEach(function (e) {
-            var rect = scrubberBox.getBoundingClientRect();
-            var mousePosition = (e.clientX - rect.left) / rect.width * 100;
-            console.log(mousePosition);
-            scrubberHover.setAttribute('style', 'width: ' + mousePosition + '%');
-        });
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            /**
+             * animate scrubber on mouseover
+             */
+            scrubberMousemoves.forEach(function (e) {
+                var rect = scrubberBox.getBoundingClientRect();
+                var mousePosition = (e.clientX - rect.left) / rect.width * 100;
+                console.log(mousePosition);
+                scrubberHover.setAttribute('style', 'width: ' + mousePosition + '%');
+            });
 
-        /**
-         * reset scrubberHover width to 0
-         */
-        scrubberMouseouts.forEach(function () {
-            scrubberHover.setAttribute('style', 'width:0');
-        });
+            /**
+             * reset scrubberHover width to 0
+             */
+            scrubberMouseouts.forEach(function () {
+                scrubberHover.setAttribute('style', 'width:0');
+            });
+        }
 
         /**
          * skip to location in track based on scrubber clicks
